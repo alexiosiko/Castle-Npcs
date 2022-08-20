@@ -14,12 +14,12 @@ public class CanvasHandler : MonoBehaviour
     }
     public void Alert(string text)
     {
-        StopCoroutine (Begin(text, 0)); // Stop if existing
+        // StopCoroutine("Begin"); // Stop if existing
         StartCoroutine(Begin(text, 2)); // Default seconds will be 2 if not specified
     }
     IEnumerator Begin(string text, float time)
     {
-        canvasChat.DOKill(); // Kill if tween is already in
+        // canvasChat.DOKill(); // Kill if tween is already in
 
         canvasChat.DOFade(0, 0); // Make alpha 0
         canvasChat.text = text;

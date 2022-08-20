@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -29,7 +29,7 @@ public class WanderScript : MonoBehaviour
         
         // Look towrads direction
 
-        if ( distance < 1 )
+        if ( distance < 0.2f )
         {
             i++;
             if (i == nodes.Length)
@@ -43,12 +43,12 @@ public class WanderScript : MonoBehaviour
         Wander();
 
         // Gravity
-        // if (controller.isGrounded == false)
-        // {
-        //     velocity += Physics.gravity * Time.deltaTime;
-        //     controller.Move(velocity * Time.deltaTime);
-        // }        
-        // else
-        //     velocity = Vector3.zero;
+        if (controller.isGrounded == false)
+        {
+            velocity += Physics.gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+        }        
+        else
+            velocity = Vector3.zero;
     }
 }
