@@ -19,9 +19,6 @@ public class WanderScript : MonoBehaviour
     }
     void Wander()
     {
-        if (i == nodes.Length)
-            i = 0;
-
         Vector2 startXZ = new Vector3(transform.position.x, transform.position.z);
         Vector2 endXZ = new Vector3(nodes[i].x, nodes[i].z);
         distance = Vector2.Distance(startXZ, endXZ);
@@ -35,6 +32,8 @@ public class WanderScript : MonoBehaviour
         if ( distance < 1 )
         {
             i++;
+            if (i == nodes.Length)
+            i = 0;
             // Look towards new direction
             transform.DOLookAt( nodes[i], 0.5f );
         }

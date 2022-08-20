@@ -5,35 +5,28 @@ using UnityEngine;
 public class LightFlicker : MonoBehaviour
 {
     new Light light;
+    bool increasing = false;
+    float saveIntensity;
     void Start()
     {
-        InvokeRepeating("Repeat", 3, 3);
         light = GetComponent<Light>();
+        saveIntensity = light.intensity;
+        light.intensity = Random.Range(0.3f, saveIntensity);
+        InvokeRepeating("Repeat", Random.Range(0, 1), 0.1f);
     }
 
     void Repeat()
     {
-        int num = Random.Range(0, 3);
+        if (increasing == true)
+            light.intensity += 0.01f;
+        else
+            light.intensity -= 0.01f;
 
-        if (num == 0)
-            StartCoroutine(Flicker());
-
-    }
-    IEnumerator Flicker()
-    {
-        float saveIntensity = light.intensity;
-
-        light.intensity = 0;
-
-        yield return new WaitForSeconds(Random.value / 2);
-        light.intensity = 0.5f;
-
-        yield return new WaitForSeconds(Random.value / 2);
-        light.intensity = 0;
-
-
-        yield return new WaitForSeconds(Random.value / 2);
-        light.intensity = saveIntensity;
-
+        // Conditions
+        if (light.intensity < 0.3f)
+            increasing = true;
+        if (light.intensity > saveIntensity)
+            increasing = false;
+        
     }
 }

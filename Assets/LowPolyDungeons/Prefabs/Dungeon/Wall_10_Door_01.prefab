@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1250999704085794137}
   - component: {fileID: 3692611088129208971}
   - component: {fileID: 4880755772724182692}
-  - component: {fileID: 7202712751135033575}
+  - component: {fileID: 8856811569398497208}
   m_Layer: 0
   m_Name: Wall_10_Door_01
   m_TagString: Untagged
@@ -101,18 +101,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 4d3ced1d4000a434faf5d90cb8a33435, type: 3}
---- !u!114 &7202712751135033575
-MonoBehaviour:
+--- !u!95 &8856811569398497208
+Animator:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824897048365966508}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5bb2b962dae0624c9e34f75d7998c15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5cccdd0826f86844b4b746dde95028c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1074073212787664088
 PrefabInstance:
   m_ObjectHideFlags: 0

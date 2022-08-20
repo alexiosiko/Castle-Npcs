@@ -9,6 +9,7 @@ TagManager:
   - Canvas
   - Single Action
   - Book
+  - Alert
   layers:
   - Default
   - TransparentFX

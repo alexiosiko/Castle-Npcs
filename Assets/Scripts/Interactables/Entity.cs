@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 public class Entity : MonoBehaviour, Interactable
 {
-    public Transform player;
+    public CanvasHandler canvas;
     public string prompt => "Press e to talk to";
+    public Animator animator;
     public void Action()
     {
-        WanderScript wander = GetComponent<WanderScript>();
-        wander.enabled = false;
-        transform.DOLookAt(player.position, 0.5f);
+        canvas.Alert("What the fuck are you doing");
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("angry") == false) // If not angry
+            animator.CrossFade("angry", 0.2f);
     }
 }

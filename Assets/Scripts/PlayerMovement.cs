@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         controller = GetComponent<CharacterController>();
     }
     void Update()
@@ -34,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
         }        
         else
             velocity = Vector3.zero;
+        if (moveDirection != Vector3.zero)
+            soundManager.PlayAudio("footsteps");
+        else
+            soundManager.StopAudio("footsteps");
     }
     public Status status;
     [Header("Movement")]
@@ -44,10 +49,9 @@ public class PlayerMovement : MonoBehaviour
     // public float playerHeight;
     // public LayerMask whatIsGround;
     // bool grounded;
-
- 
     public Transform orientation;
 
+    SoundManager soundManager;
     float horizontalInput;
     float verticalInput;
 
