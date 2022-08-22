@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public Status status;
+    Status status;
     public float sensX;
     public float sensY;
     public Transform orientation;
@@ -12,24 +12,21 @@ public class PlayerCamera : MonoBehaviour
     float yRotation;
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        status = FindObjectOfType<Status>();
     }
     void Update()
     {   
         if (status.interrupted == true)
             return;
 
-        // Get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * sensY * Time.deltaTime;
-    
-        yRotation += mouseX;
+        float mouseX = Input.GetAxis("Mouse X") * sensX;
+        float mouseY = Input.GetAxis("Mouse Y") * sensY;
+
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        // Rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        orientation.Rotate(Vector3.up * mouseX);
     }
 }

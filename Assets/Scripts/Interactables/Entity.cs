@@ -3,18 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Entity : MonoBehaviour, Interactable
+public class Entity : InteractableBehaviours, Interactable
 {
-    public CanvasHandler canvas;
+    protected CanvasHandler canvas;
     public string text;
     public string prompt => "Press e to talk to";
-    public Animator animator;
+    protected Animator animator;
+    protected Transform player;
+    
     public virtual void Action()
     {
+        // An action that ALL entites reform
     }
-    public void LookTowards(Transform target)
+    protected void LookTowards(Transform target)
     {
-        Vector3 xAndY = new Vector3(target.position.x, 0, target.position.z);
-        transform.DOLookAt(xAndY, 0.5f);
+        transform.DOLookAt(target.position, 1f, AxisConstraint.Y);
+    }
+    protected IEnumerator LookAtAndBack(Vector3 target, Vector3 defaultTarget, float time)
+    {
+        // This one does NOT follow the target
+        transform.DOLookAt(target,  1f, AxisConstraint.Y);
+        yield return new WaitForSeconds(time);
+        transform.DOLookAt(defaultTarget, 1f, AxisConstraint.Y);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        player = GameObject.FindWithTag("Player").transform;
+        canvas = FindObjectOfType<CanvasHandler>();
+        animator = GetComponent<Animator>();
     }
 }

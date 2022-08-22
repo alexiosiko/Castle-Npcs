@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float baseSpeed = 12f;
+    public float gravity = -9.81f;
+    public float jumpHeight = 3f;
+    public float sprintSpeed = 5f;
+    float speedBoost = 1f;
+    Vector3 velocity;
     void Start()
     {
+        status = FindObjectOfType<Status>();
         soundManager = FindObjectOfType<SoundManager>();
         controller = GetComponent<CharacterController>();
     }
@@ -20,43 +27,37 @@ public class PlayerMovement : MonoBehaviour
         if (status.interrupted == true)
             return;
             
-        // Get input
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        // Don't ask me i copied this from somewhere
+        if (controller.isGrounded && velocity.y < 0)
+            velocity.y = -2f;
 
-        // Calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
-    
-        if (controller.isGrounded == false)
-        {
-            velocity += Physics.gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
-        }        
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetButton("Fire3"))
+            speedBoost = sprintSpeed;
         else
-            velocity = Vector3.zero;
-        if (moveDirection != Vector3.zero)
+            speedBoost = 1f;
+
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * (baseSpeed + speedBoost) * Time.deltaTime);
+
+        // Audio -> play footsteps
+        if (move != Vector3.zero)
             soundManager.PlayAudio("footsteps");
         else
             soundManager.StopAudio("footsteps");
+
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
     }
-    public Status status;
-    [Header("Movement")]
-    public float moveSpeed;
-    public float groundDrag;
-
-    // [Header("Grounded Check")]
-    // public float playerHeight;
-    // public LayerMask whatIsGround;
-    // bool grounded;
-    public Transform orientation;
-
+    Status status;
     SoundManager soundManager;
-    float horizontalInput;
-    float verticalInput;
-
-    public Vector3 moveDirection;
-    public Vector3 velocity = Vector3.zero;
     CharacterController controller;
 
 }

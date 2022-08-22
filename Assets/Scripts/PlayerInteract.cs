@@ -14,8 +14,8 @@ public class PlayerInteract : MonoBehaviour
     }
     void Highlight()
     {
-        Debug.DrawLine(cameraPosition.position, cameraPosition.position + cameraOrientation.forward);
-        if (Physics.Raycast(cameraPosition.position, cameraOrientation.forward, out hit, 2f, LayerMask.GetMask("Interactable")))
+        Debug.DrawLine(cameraPosition.position, cameraPosition.position + cameraPosition.forward);
+        if (Physics.Raycast(cameraPosition.position, cameraPosition.forward, out hit, 2f, LayerMask.GetMask("Interactable")))
         {
             Interactable i = hit.collider.GetComponentInParent<Interactable>();
             if (i != null)
@@ -27,15 +27,18 @@ public class PlayerInteract : MonoBehaviour
     void Interact()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cameraPosition.position, cameraOrientation.forward, out hit, 2f, LayerMask.GetMask("Interactable")))
+        if (Physics.Raycast(cameraPosition.position, cameraPosition.transform.forward, out hit, 2f, LayerMask.GetMask("Interactable")))
         {
             Interactable i = hit.collider.GetComponentInParent<Interactable>();
             if (i != null)
                 i.Action();
         }
     }
-    public Status status;
-    public Transform cameraOrientation;
+    void Start()
+    {
+        status = FindObjectOfType<Status>();
+    }
+    Status status;
     public Transform cameraPosition;
     public TMP_Text alert;
     RaycastHit hit;

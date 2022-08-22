@@ -1883,6 +1883,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0205421327a7ec34da6c11881dade08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - name: 
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 03fecb50bc01b9d489c555eee5886ba4, type: 3}
+    loop: 0
+    pitch: 1
+    volume: 0.5
+    spacialBlend: 1
   canvas: {fileID: 0}
   text: Only members of the council are allowed in here
   animator: {fileID: 95848811368337272}

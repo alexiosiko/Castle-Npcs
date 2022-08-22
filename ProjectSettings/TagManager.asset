@@ -10,6 +10,8 @@ TagManager:
   - Single Action
   - Book
   - Alert
+  - Book Text
+  - Book Transform
   layers:
   - Default
   - TransparentFX

@@ -517,6 +517,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   text: I am a librarian
   animator: {fileID: 95892162074931524}
+  player: {fileID: 0}
 --- !u!1 &1217098102103856
 GameObject:
   m_ObjectHideFlags: 0

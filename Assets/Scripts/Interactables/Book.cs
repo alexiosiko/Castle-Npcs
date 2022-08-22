@@ -4,17 +4,33 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Book : MonoBehaviour, Interactable
+public class Book : InteractableBehaviours, Interactable
 {   
-    public Status status;
-    public Transform bookTransform;
-    public string bookText;
-    public TMP_Text text;
+    SoundManager soundManager;
+    Status status;
+    Transform bookTransform;
+    TMP_Text bookTextElement;
+    public Sprite[] pages;
     public string prompt => "Press e to read book";
     public void Action()
     {
-        bookTransform.DOLocalMoveY(0, 1);
-        text.text = bookText;
+        bookTransform.DOLocalMoveY(20, 0.7f); // 20 is the height
         status.Interrupt();
+        BookInterface bookInterface = bookTransform.GetComponentInChildren<BookInterface>();
+        bookInterface.bookPages = pages;
+        bookInterface.Start();
+        soundManager.PlayAudio("bookopen");
+
+    }
+    protected override void Start()
+    {
+        base.Start();
+
+        soundManager = FindObjectOfType<SoundManager>();
+        status = FindObjectOfType<Status>();
+        bookTransform = GameObject.FindWithTag("Book Transform").transform;
+
+        // foreach (Sound s in sounds)
+        //     AddSound(s);
     }
 }

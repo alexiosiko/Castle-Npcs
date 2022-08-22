@@ -21,22 +21,30 @@ public class WanderScript : MonoBehaviour
     {
         Vector2 startXZ = new Vector3(transform.position.x, transform.position.z);
         Vector2 endXZ = new Vector3(nodes[i].x, nodes[i].z);
-        distance = Vector2.Distance(startXZ, endXZ);
         
         direction = nodes[i] - transform.position;
         direction.y = 0; // Don't care about height
         controller.Move(direction.normalized * speed * Time.deltaTime);
         
-        // Look towrads direction
-
+        // Omit Y values;
+        startXZ.y = 0;
+        endXZ.y = 0;
+        // Get distance
+        distance = Vector2.Distance(startXZ, endXZ);
         if ( distance < 0.2f )
         {
             i++;
             if (i == nodes.Length)
             i = 0;
             // Look towards new direction
-            transform.DOLookAt( nodes[i], 0.5f );
+            // I made this a function so i can call it from another script
+            // rather than just calling this function every frame :D
+            LookTowardsNode(); 
         }
+    }
+    public void LookTowardsNode()
+    {
+        transform.DOLookAt( nodes[i], 0.5f );
     }
     void Update()
     {
