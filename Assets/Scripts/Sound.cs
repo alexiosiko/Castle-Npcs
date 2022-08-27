@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable] public class Sound
 {
-    public string name = "*Required if SoundManager*";
+    public string name = "*Only Required if SoundManager*";
     [HideInInspector] public AudioSource source;
     public AudioClip clip;
     public bool loop = false;

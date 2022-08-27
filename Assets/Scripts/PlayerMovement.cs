@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     void Start()
     {
-        status = FindObjectOfType<Status>();
+        status = FindObjectOfType<StatusManager>();
         soundManager = FindObjectOfType<SoundManager>();
         controller = GetComponent<CharacterController>();
     }
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
     }
-    Status status;
+    StatusManager status;
     SoundManager soundManager;
     CharacterController controller;
 

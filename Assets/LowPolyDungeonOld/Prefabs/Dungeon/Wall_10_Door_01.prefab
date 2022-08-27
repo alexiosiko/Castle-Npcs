@@ -149,7 +149,15 @@ MonoBehaviour:
     pitch: 1
     volume: 0.4
     spacialBlend: 1
-  locked: 1
+  - name: unlock
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9435ab65457f25e42b750708d2790b8b, type: 3}
+    loop: 0
+    pitch: 1
+    volume: 0.7
+    spacialBlend: 1
+  idRequired: goldkey
+  locked: 0
 --- !u!1001 &1074073212787664088
 PrefabInstance:
   m_ObjectHideFlags: 0

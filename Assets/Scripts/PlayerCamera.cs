@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    Status status;
+    StatusManager status;
     public float sensX;
     public float sensY;
     public Transform orientation;
@@ -12,7 +12,7 @@ public class PlayerCamera : MonoBehaviour
     float yRotation;
     void Start()
     {
-        status = FindObjectOfType<Status>();
+        status = FindObjectOfType<StatusManager>();
     }
     void Update()
     {   

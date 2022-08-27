@@ -7,7 +7,7 @@ using TMPro;
 public class Book : InteractableBehaviours, Interactable
 {   
     SoundManager soundManager;
-    Status status;
+    StatusManager status;
     Transform bookTransform;
     TMP_Text bookTextElement;
     public Sprite[] pages;
@@ -27,7 +27,7 @@ public class Book : InteractableBehaviours, Interactable
         base.Start();
 
         soundManager = FindObjectOfType<SoundManager>();
-        status = FindObjectOfType<Status>();
+        status = FindObjectOfType<StatusManager>();
         bookTransform = GameObject.FindWithTag("Book Transform").transform;
 
         // foreach (Sound s in sounds)

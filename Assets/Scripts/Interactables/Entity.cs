@@ -5,7 +5,7 @@ using DG.Tweening;
 using TMPro;
 public class Entity : InteractableBehaviours, Interactable
 {
-    protected CanvasHandler canvas;
+    protected CanvasManager canvas;
     public string text;
     public string prompt => "Press e to talk to";
     protected Animator animator;
@@ -31,7 +31,7 @@ public class Entity : InteractableBehaviours, Interactable
     {
         base.Start();
         player = GameObject.FindWithTag("Player").transform;
-        canvas = FindObjectOfType<CanvasHandler>();
+        canvas = FindObjectOfType<CanvasManager>();
         animator = GetComponent<Animator>();
     }
 }
