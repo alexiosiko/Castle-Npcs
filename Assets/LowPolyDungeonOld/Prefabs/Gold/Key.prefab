@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d08a0d1aba6bbce4b815d4bd76548e32, type: 2}
+  - {fileID: 2100000, guid: dbe7fe91c73971f45a948e8ef9bd1716, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,5 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bb10a3df03ce646926bcbd98a7115f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
-  id: goldkey
+  sprite: {fileID: 21300000, guid: e36bd8642d561b84e8d18ce50dd398a8, type: 3}

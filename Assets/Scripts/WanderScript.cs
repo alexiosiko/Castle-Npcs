@@ -19,16 +19,15 @@ public class WanderScript : MonoBehaviour
     }
     void Wander()
     {
-        Vector2 startXZ = new Vector3(transform.position.x, transform.position.z);
-        Vector2 endXZ = new Vector3(nodes[i].x, nodes[i].z);
+        // We omit the Y vector
+        Vector2 startXZ = new Vector2(transform.position.x, transform.position.z);
+        Vector2 endXZ = new Vector2(nodes[i].x, nodes[i].z);
         
         direction = nodes[i] - transform.position;
         direction.y = 0; // Don't care about height
         controller.Move(direction.normalized * speed * Time.deltaTime);
         
-        // Omit Y values;
-        startXZ.y = 0;
-        endXZ.y = 0;
+
         // Get distance
         distance = Vector2.Distance(startXZ, endXZ);
         if ( distance < 0.2f )

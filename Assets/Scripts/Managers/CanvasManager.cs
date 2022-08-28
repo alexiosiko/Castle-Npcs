@@ -16,13 +16,14 @@ public class CanvasManager : MonoBehaviour
         bookTransform = GameObject.FindWithTag("Book Transform").transform;
         soundManager = FindObjectOfType<SoundManager>();
     }
-    public void Alert(string text, float time)
+    public void Chat(string text, float time)
     {
-        StopCoroutine (Begin(text, 0)); // Stop if existing
+        StopCoroutine ("Begin"); // Stop if existing
         StartCoroutine(Begin(text, time));
     }
-    public void Alert(string text)
+    public void Chat(string text)
     {
+        StopCoroutine ("Begin"); // Stop if existing
         StartCoroutine(Begin(text, 2)); // Default seconds will be 2 if not specified
     }
     IEnumerator Begin(string text, float time)

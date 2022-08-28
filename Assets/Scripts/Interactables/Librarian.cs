@@ -13,12 +13,18 @@ public class Librarian : Entity
     public override void Action()
     {
         base.Action();
-        canvas.Alert(text);
         PlayAudio(sounds[0], false);
 
+        PlayText();
 
         LookTowards(player);
+        
+        StopAllCoroutines();
         StartCoroutine(Freeze());
+    }
+    void PlayText()
+    {
+        canvas.Chat("I've never seen you in this castle before ... ");
     }
     IEnumerator Freeze()
     {
@@ -28,6 +34,6 @@ public class Librarian : Entity
         yield return new WaitForSeconds(2);
         animator.Play("walk");
         wander.enabled = true;
-        wander.LookTowardsNode(); // Chage his direction
+        wander.LookTowardsNode(); // Change his look direction
     }
 }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Door : InteractableBehaviours, Interactable
 {
-    public string idRequired;
+    public string keyName;
     public bool locked = false;
     public string prompt => "Press e to open door";
     public void Action()
     {
-        if (locked == false) // All good
+        if (locked == false) // Is unlocked
             Open();
-        if (locked && inventory.Search(idRequired)) // Locked and we have the key
+        else if (slots.TakeItem(keyName)) // Check if we have key
             Unlock();
         else // Locked and we don't have key
             WiggleDoor();
@@ -23,12 +23,8 @@ public class Door : InteractableBehaviours, Interactable
     }
     void WiggleDoor()
     {
-            // If locked STOP
-        if (locked == true)
-        {
-            PlayAudio(sounds[1]);
-            return;
-        }
+        canvas.Chat("You do not have the correct key ... ", 1);
+        PlayAudio(sounds[1]);
     }
     void Open()
     {
@@ -40,7 +36,9 @@ public class Door : InteractableBehaviours, Interactable
     protected override void Start()
     {
         base.Start();
-        inventory = FindObjectOfType<InventoryManager>();
+        slots = FindObjectOfType<Slots>();
+        canvas = FindObjectOfType<CanvasManager>();
     }
-    InventoryManager inventory;
+    Slots slots;
+    CanvasManager canvas;
 }

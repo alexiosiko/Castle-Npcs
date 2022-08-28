@@ -2,22 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectable : InteractableBehaviours, Interactable
+public class Collectable : MonoBehaviour, Interactable
 {
-    public string id;
+    public string itemName;
+    public Sprite sprite; // This is the sprite shown in inventory
     public string prompt => ""; // No prompt
     public void Action()
     {
         soundManager.PlayAudio("itempickup"); // Sound effect
-        inventory.itemsIDs.Add(id); // Add id to list
+        // Add the sprite, and the COLOR of THIS materials FIRST color
+        slots.AddItem(sprite, GetComponent<MeshRenderer>().material.color, itemName);
+        // inventory.itemsIDs.Add(id); // Add id to list
         Destroy(gameObject);
     }
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-        inventory = FindObjectOfType<InventoryManager>();
         soundManager = FindObjectOfType<SoundManager>();
+        slots = FindObjectOfType<Slots>();
     }
-    InventoryManager inventory;
     SoundManager soundManager;
+    Slots slots;
 }
