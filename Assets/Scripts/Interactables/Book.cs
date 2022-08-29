@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Book : InteractableAudio, Interactable
+public class Book : InteractableAudio, InteractableInterface
 {   
     SoundManager soundManager;
     StatusManager status;
@@ -32,5 +32,9 @@ public class Book : InteractableAudio, Interactable
 
         // foreach (Sound s in sounds)
         //     AddSound(s);
+    }
+    public void Action(int child)
+    {
+        // An action that ALL entites reform
     }
 }

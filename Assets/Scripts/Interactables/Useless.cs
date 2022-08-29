@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Useless : InteractableAudio, Interactable
+public class Useless : InteractableAudio, InteractableInterface
 {
     Animator animator;
     public string prompt => "";
@@ -15,6 +15,10 @@ public class Useless : InteractableAudio, Interactable
 
         transform.DOShakeRotation(0.3f, 30, 2, 45);
         Invoke("Reset", 0.3f); // This resets to normal defaultRotation
+    }
+    public void Action(int child)
+    {
+        // An action that ALL entites reform
     }
     void Reset()
     {

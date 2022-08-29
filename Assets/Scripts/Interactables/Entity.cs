@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Entity : InteractableAudio, Interactable
+public class Entity : InteractableAudio, InteractableInterface
 {
     protected CanvasManager canvas;
     public string text;
@@ -12,6 +12,10 @@ public class Entity : InteractableAudio, Interactable
     protected Transform player;
     
     public virtual void Action()
+    {
+        // An action that ALL entites reform
+    }
+    public virtual void Action(int child)
     {
         // An action that ALL entites reform
     }

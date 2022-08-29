@@ -5,69 +5,53 @@ using UnityEngine.UI;
 
 public class Slots : MonoBehaviour
 {
-    void Update()
-    {
-        // Get highlight input
-        for (int i = 1; i <= transform.childCount; i++)
-            if (Input.GetKeyDown(i.ToString()))
-                Place(i - 1);
-        
-    }
-    void Place(int child)
-    {
-        Transform slotObj = transform.GetChild(child).GetChild(1);
-        // if (TakeItem(slotObj.name)); // Remove item from inventory
-
-    }
-    public void AddItem(GameObject collectable, Sprite sprite, string itemName)
+    public void AddItem(GameObject collectable, Sprite sprite)
     {
         foreach (Transform t in transform)
         {
+            if (t.childCount > 1)
+                continue;
+
             Image i = t.GetChild(0).GetComponent<Image>();
-            if (i.sprite == null)
-            {
-                // Update sprite
-                i.sprite = sprite;
-                i.color = collectable.GetComponent<MeshRenderer>().material.color;
 
-                // Update name to use for ID
-                t.name = itemName;
+            // Update sprite
+            i.sprite = sprite;
+            i.color = collectable.GetComponent<MeshRenderer>().material.color;
 
-                collectable.transform.SetParent(t); // Set parent to the slot
-                collectable.SetActive(false); // Disable
+            // Add collectableGameObject to slot
+            collectable.transform.SetParent(t); // Set parent to the slot
+            collectable.SetActive(false); // Disable
 
-                return;
-            }
+            return;
         }
         Debug.Log("Inventory is full ...");
     }
-    public bool TakeItem(string nameOfSprite)
+    public void RemoveItem(int child, bool destroy = true)
     {
-        foreach (Transform t in transform)
+        // Gets the slot and calls the overloaded function with the slot transform
+        Transform slot = transform.GetChild(child);
+        RemoveItem(slot, destroy);
+    }
+    public void RemoveItem(Transform slot, bool destroy = true)
+    {
+        if (slot.childCount > 1)
         {
-
-            if (t.name == "Empty") // If IS empty
-                continue;
-
-            if (t.name != nameOfSprite) // If not the correct name
-                continue;
-
-            Image i = t.GetChild(0).GetComponent<Image>();
-            
-            // Reset sprite
+            Image i = slot.GetChild(0).GetComponent<Image>();
             i.sprite = null;
             i.color = Color.clear;
-            
-            // Update name to default "Name"
-            t.name = "Empty";
 
-            // Delete GameObject save
-            Destroy(t.GetChild(1).gameObject);
-
-            return true;
+            // Destroy
+            if (destroy == true)
+                Destroy(slot.GetChild(1).gameObject);
         }
-        Debug.Log("Could not find: " + nameOfSprite + "  in inventory");
-        return false;
+    }
+    public GameObject GetItem(int child)
+    {
+        Transform slot = transform.GetChild(child);
+        if (slot.childCount > 1) // Has an object
+            return slot.GetChild(1).gameObject;
+            
+        return null; // If empty, return null
     }
     void Start()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractableAudio, Interactable
+public class Door : InteractableAudio, InteractableInterface
 {
     public string keyName;
     public bool locked = false;
@@ -11,19 +11,45 @@ public class Door : InteractableAudio, Interactable
     {
         if (locked == false) // Is unlocked
             Open();
-        else if (slots.TakeItem(keyName)) // Check if we have key
-            Unlock();
-        else // Locked and we don't have key
+        else // Door is locked
+        {
+            canvas.Chat("Door is locked ... ", 1);
             WiggleDoor();
+        }
     }
-    void Unlock()
+    public void Action(int child)
     {
+        Unlock(child);
+    }
+    void Unlock(int child)
+    {
+        if (locked == false) // Is unlocked
+            return;
+        
+
+        GameObject item = slots.GetItem(child);
+        if (item == null) // If NO item
+        {
+            canvas.Chat("You don't have an item in this slot ...");
+            WiggleDoor();
+            return;
+        }
+
+        // If item is NOT the key STOP
+        if (item.GetComponent<Collectable>().itemName != keyName)
+        {
+            canvas.Chat("This key does not fit ...");
+            WiggleDoor();
+            return;
+        }
+
+        // UNLOCK
+        slots.RemoveItem(child); // Delete key
         locked = false;
         PlayAudio(sounds[2]); // Unlock sound effect
     }
     void WiggleDoor()
     {
-        canvas.Chat("You do not have the correct key ... ", 1);
         PlayAudio(sounds[1]);
     }
     void Open()
