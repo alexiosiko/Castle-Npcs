@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Entity : InteractableBehaviours, Interactable
+public class Entity : InteractableAudio, Interactable
 {
     protected CanvasManager canvas;
     public string text;

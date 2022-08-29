@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableBehaviours : MonoBehaviour
+public class InteractableAudio : MonoBehaviour
 {
     public Sound[] sounds;
     protected virtual void Start()

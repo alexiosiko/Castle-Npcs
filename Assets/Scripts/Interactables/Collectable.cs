@@ -11,9 +11,8 @@ public class Collectable : MonoBehaviour, Interactable
     {
         soundManager.PlayAudio("itempickup"); // Sound effect
         // Add the sprite, and the COLOR of THIS materials FIRST color
-        slots.AddItem(sprite, GetComponent<MeshRenderer>().material.color, itemName);
-        // inventory.itemsIDs.Add(id); // Add id to list
-        Destroy(gameObject);
+        
+        slots.AddItem(gameObject, sprite, itemName);
     }
     void Start()
     {

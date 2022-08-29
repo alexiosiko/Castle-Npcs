@@ -114,7 +114,7 @@ MonoBehaviour:
   sounds:
   - name: 
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: a05dce554fca08245ab39d84676fd62d, type: 3}
+    clip: {fileID: 8300000, guid: f14035ea6af26ce4c83d492d2ad0cb0f, type: 3}
     loop: 0
     pitch: 1
     volume: 0.5

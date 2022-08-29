@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Useless : InteractableBehaviours, Interactable
+public class Useless : InteractableAudio, Interactable
 {
     Animator animator;
     public string prompt => "";

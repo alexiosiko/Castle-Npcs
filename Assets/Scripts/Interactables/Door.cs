@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractableBehaviours, Interactable
+public class Door : InteractableAudio, Interactable
 {
     public string keyName;
     public bool locked = false;

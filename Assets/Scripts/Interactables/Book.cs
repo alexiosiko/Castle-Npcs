@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Book : InteractableBehaviours, Interactable
+public class Book : InteractableAudio, Interactable
 {   
     SoundManager soundManager;
     StatusManager status;
