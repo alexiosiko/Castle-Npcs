@@ -9,9 +9,9 @@ public class Collectable : MonoBehaviour, InteractableInterface
     public string prompt => ""; // No prompt
     public void Action()
     {
-        soundManager.PlayAudio("itempickup"); // Sound effect
-        // Add the sprite, and the COLOR of THIS materials FIRST color
-        
+        soundManager.PlayAudio("itempickup", true); // Sound effect
+
+        // Add the sprite
         slots.AddItem(gameObject, sprite);
     }
     public void Action(int child)

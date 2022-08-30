@@ -6,21 +6,12 @@ using TMPro;
 
 public class Book : InteractableAudio, InteractableInterface
 {   
-    SoundManager soundManager;
-    StatusManager status;
-    Transform bookTransform;
-    TMP_Text bookTextElement;
+    [Header("No sounds required")]
     public Sprite[] pages;
     public string prompt => "Press e to read book";
     public void Action()
     {
-        bookTransform.DOLocalMoveY(20, 0.7f); // 20 is the height
-        status.Interrupt();
-        BookInterface bookInterface = bookTransform.GetComponentInChildren<BookInterface>();
-        bookInterface.bookPages = pages;
-        bookInterface.Start();
-        soundManager.PlayAudio("bookopen");
-
+        canvasManager.OpenBook(pages);
     }
     protected override void Start()
     {
@@ -28,13 +19,13 @@ public class Book : InteractableAudio, InteractableInterface
 
         soundManager = FindObjectOfType<SoundManager>();
         status = FindObjectOfType<StatusManager>();
-        bookTransform = GameObject.FindWithTag("Book Transform").transform;
-
-        // foreach (Sound s in sounds)
-        //     AddSound(s);
+        canvasManager = FindObjectOfType<CanvasManager>();
     }
     public void Action(int child)
     {
         // An action that ALL entites reform
     }
+    SoundManager soundManager;
+    StatusManager status;
+    CanvasManager canvasManager;
 }

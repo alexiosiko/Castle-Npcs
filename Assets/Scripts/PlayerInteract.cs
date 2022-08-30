@@ -13,7 +13,7 @@ public class PlayerInteract : MonoBehaviour
             Interact();
 
         // Get number input
-        for (int i = 1; i <= 7; i++) // 7 is the number of slots
+        for (int i = 1; i <= 6; i++) // 6 is the number of slots
             if (Input.GetKeyDown(i.ToString()))
             {
                 UseItem(i - 1);

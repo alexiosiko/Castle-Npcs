@@ -6,16 +6,7 @@ using DG.Tweening;
 
 public class CanvasManager : MonoBehaviour
 {
-    StatusManager status;
-    Transform bookTransform;
-    public TMP_Text canvasChat;
-    SoundManager soundManager;
-    void Start()
-    {
-        status = FindObjectOfType<StatusManager>();
-        bookTransform = GameObject.FindWithTag("Book Transform").transform;
-        soundManager = FindObjectOfType<SoundManager>();
-    }
+
     public void Chat(string text, float time)
     {
         StopCoroutine ("Begin"); // Stop if existing
@@ -34,10 +25,41 @@ public class CanvasManager : MonoBehaviour
         yield return new WaitForSeconds(time + 1); // The one is time for fade
         canvasChat.DOFade(0, 1);
     }
+    public void OpenBook(Sprite[] pages)
+    {
+        bookTransform.DOLocalMoveY(20, 0.7f); // 20 is the height
+        status.Interrupt();
+        BookInterface bookInterface = bookTransform.GetComponentInChildren<BookInterface>();
+        bookInterface.bookPages = pages;
+        bookInterface.Start();
+        soundManager.PlayAudio("bookopen");
+
+        MoveInventory(150);
+    }
+    
     public void CloseBook()
     {
         soundManager.PlayAudio("bookclose");
         bookTransform.DOLocalMoveY(-500, 0.7f);
         status.UnInterrupt();
+
+        MoveInventory(0);
+    }
+    void MoveInventory(float y)
+    {
+        inventoryTransform.DOKill();
+        inventoryTransform.DOLocalMoveY(y, 0.5f);
+    }
+    StatusManager status;
+    Transform bookTransform;
+    public TMP_Text canvasChat;
+    SoundManager soundManager;
+    Transform inventoryTransform;
+    void Start()
+    {
+        inventoryTransform = GameObject.FindWithTag("Inventory Transform").transform;
+        status = FindObjectOfType<StatusManager>();
+        bookTransform = GameObject.FindWithTag("Book Transform").transform;
+        soundManager = FindObjectOfType<SoundManager>();
     }
 }
