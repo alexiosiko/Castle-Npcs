@@ -50,12 +50,13 @@ public class Door : InteractableAudio, InteractableInterface
     }
     void WiggleDoor()
     {
+        animator.Play("Wiggle");
         PlayAudio(sounds[1]);
     }
     void Open()
     {
         PlayAudio(sounds[0]); // 0 is door open audio
-        GetComponent<Animator>().Play("Action"); // Animate
+        animator.Play("Action"); // Animate
         foreach (Transform t in transform) // Swap the layerMasks
             t.gameObject.layer = LayerMask.GetMask("Default");
     }
@@ -64,7 +65,9 @@ public class Door : InteractableAudio, InteractableInterface
         base.Start();
         slots = FindObjectOfType<Slots>();
         canvas = FindObjectOfType<CanvasManager>();
+        animator = GetComponent<Animator>();
     }
+    Animator animator;
     Slots slots;
     CanvasManager canvas;
 }
