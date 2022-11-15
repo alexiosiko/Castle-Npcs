@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface PlaceableInterface
+public abstract class PlaceableInterface : MonoBehaviour
 {
-    public void Place(int child, Transform target);
+    public abstract void Place(int child, Transform target);
 }

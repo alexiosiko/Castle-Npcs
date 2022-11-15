@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceableSpot : MonoBehaviour, PlaceableInterface
+public class PlaceableSpot : PlaceableInterface
 {
     public string requiredItemName;
-    public void Place(int child, Transform target)
+    public override void Place(int child, Transform target)
     {
         // Item already exists at placeable
         if (target.childCount != 0)

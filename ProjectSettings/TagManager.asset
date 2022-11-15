@@ -12,7 +12,6 @@ TagManager:
   - Alert
   - Book Text
   - Book Transform
-  - Enviroment
   - Enviroment Parent
   - Inventory Transform
   layers:

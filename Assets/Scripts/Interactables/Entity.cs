@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Entity : InteractableAudio, InteractableInterface
+public class Entity : InteractableInterface
 {
     protected CanvasManager canvas;
     public string text;
-    public string prompt => "Press e to talk to";
     protected Animator animator;
     protected Transform player;
     
-    public virtual void Action()
+    public override void Action()
     {
         // An action that ALL entites reform
     }
-    public virtual void Action(int child)
+    public override void Action(int child)
     {
         // An action that ALL entites reform
     }
@@ -33,9 +32,11 @@ public class Entity : InteractableAudio, InteractableInterface
 
     protected override void Start()
     {
+        
         base.Start();
         player = GameObject.FindWithTag("Player").transform;
         canvas = FindObjectOfType<CanvasManager>();
         animator = GetComponent<Animator>();
+        prompt = "Press e to talk to";
     }
 }

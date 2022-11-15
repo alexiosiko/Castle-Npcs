@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : InteractableAudio, InteractableInterface
+public class Chest : InteractableInterface
 {
-    public string prompt => "Press e to open chest";
-    public void Action()
+    public override void Action()
     {
         GetComponent<Animator>().Play("Open");
         
@@ -15,8 +14,12 @@ public class Chest : InteractableAudio, InteractableInterface
         foreach (Transform t in transform) // Swap the layerMasks
             t.gameObject.layer = LayerMask.GetMask("Default");
     }
-    public void Action(int child)
+    public override void Action(int child)
     {
         // An action that ALL entites reform
+    }
+    protected override void Start()
+    {
+        prompt = "Press e to open chest";
     }
 }

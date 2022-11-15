@@ -9,10 +9,12 @@ public class LightFlicker : MonoBehaviour
     float saveIntensity;
     void Start()
     {
-        light = GetComponent<Light>();
-        saveIntensity = light.intensity;
-        light.intensity = Random.Range(0.3f, saveIntensity);
-        InvokeRepeating("Repeat", Random.Range(0, 1), 0.1f);
+        // Disabled this, but i will make it work better and run this back :D
+
+        // light = GetComponent<Light>();
+        // saveIntensity = light.intensity;
+        // light.intensity = Random.Range(0.3f, saveIntensity);
+        // InvokeRepeating("Repeat", Random.Range(0, 1), 0.1f);
     }
 
     void Repeat()

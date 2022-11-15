@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Librarian : Entity
 {
-    WanderScript wander;
+    Walk wander;
     protected override void Start()
     {
         base.Start();
-        wander = GetComponent<WanderScript>();
+        wander = GetComponent<Walk>();
     }
     public override void Action()
     {

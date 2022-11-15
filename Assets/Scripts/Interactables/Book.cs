@@ -4,12 +4,11 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Book : InteractableAudio, InteractableInterface
+public class Book : InteractableInterface
 {   
     [Header("No sounds required")]
     public Sprite[] pages;
-    public string prompt => "Press e to read book";
-    public void Action()
+    public override void Action()
     {
         canvasManager.OpenBook(pages);
     }
@@ -20,8 +19,10 @@ public class Book : InteractableAudio, InteractableInterface
         soundManager = FindObjectOfType<SoundManager>();
         status = FindObjectOfType<StatusManager>();
         canvasManager = FindObjectOfType<CanvasManager>();
+
+        prompt = "Press e to read book";
     }
-    public void Action(int child)
+    public override void Action(int child)
     {
         // An action that ALL entites reform
     }

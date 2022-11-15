@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractableAudio, InteractableInterface
+public class Door : InteractableInterface
 {
     public string keyName;
     public bool locked = false;
-    public string prompt => "Press e to open door";
-    public void Action()
+    public override void Action()
     {
         if (locked == false) // Is unlocked
             Open();
@@ -17,7 +16,7 @@ public class Door : InteractableAudio, InteractableInterface
             WiggleDoor();
         }
     }
-    public void Action(int child)
+    public override void Action(int child)
     {
         Unlock(child);
     }
@@ -66,7 +65,10 @@ public class Door : InteractableAudio, InteractableInterface
         slots = FindObjectOfType<Slots>();
         canvas = FindObjectOfType<CanvasManager>();
         animator = GetComponent<Animator>();
+
+        prompt = "Press e to open door";
     }
+
     Animator animator;
     Slots slots;
     CanvasManager canvas;
