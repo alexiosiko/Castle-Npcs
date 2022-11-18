@@ -12,7 +12,7 @@ public class Door : InteractableInterface
             Open();
         else // Door is locked
         {
-            canvas.Chat("Door is locked ... ", 1);
+            CanvasManager.instance.Chat("Door is locked ... ", 1);
             WiggleDoor();
         }
     }
@@ -29,7 +29,7 @@ public class Door : InteractableInterface
         GameObject item = slots.GetItem(child);
         if (item == null) // If NO item
         {
-            canvas.Chat("You don't have an item in this slot ...");
+            CanvasManager.instance.Chat("You don't have an item in this slot ...");
             WiggleDoor();
             return;
         }
@@ -37,7 +37,7 @@ public class Door : InteractableInterface
         // If item is NOT the key STOP
         if (item.GetComponent<Collectable>().itemName != keyName)
         {
-            canvas.Chat("This key does not fit ...");
+            CanvasManager.instance.Chat("This key does not fit ...");
             WiggleDoor();
             return;
         }
@@ -63,7 +63,6 @@ public class Door : InteractableInterface
     {
         base.Start();
         slots = FindObjectOfType<Slots>();
-        canvas = FindObjectOfType<CanvasManager>();
         animator = GetComponent<Animator>();
 
         prompt = "Press e to open door";
@@ -71,5 +70,4 @@ public class Door : InteractableInterface
 
     Animator animator;
     Slots slots;
-    CanvasManager canvas;
 }

@@ -24,7 +24,7 @@ public class Librarian : Entity
     }
     void PlayText()
     {
-        canvas.Chat("I've never seen you in this castle before ... ");
+        CanvasManager.instance.Chat("I've never seen you in this castle before ... ");
     }
     IEnumerator Freeze()
     {

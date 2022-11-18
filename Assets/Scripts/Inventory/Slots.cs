@@ -53,9 +53,4 @@ public class Slots : MonoBehaviour
             
         return null; // If empty, return null
     }
-    void Start()
-    {
-        canvas = FindObjectOfType<CanvasManager>();
-    }
-    CanvasManager canvas;
 }

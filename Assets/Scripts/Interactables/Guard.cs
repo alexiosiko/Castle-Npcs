@@ -10,7 +10,7 @@ public class Guard : Entity
 
         PlayAudio(sounds[0]);
         
-        canvas.Chat(text);
+        CanvasManager.instance.Chat(text);
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("angry") == false)
             animator.CrossFade("angry", 0.5f);
         // Forward point to a vector infront of guard

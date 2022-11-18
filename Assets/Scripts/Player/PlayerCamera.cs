@@ -7,16 +7,11 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
     [SerializeField] private Transform orientation;
-    private StatusManager status;
     private float xRotation;
     private float yRotation;
-    private void Start()
-    {
-        status = FindObjectOfType<StatusManager>();
-    }
     private void Update()
     {   
-        if (status.interrupted == true)
+        if (StatusManager.instance.interrupted == true)
             return;
 
         float mouseX = Input.GetAxis("Mouse X") * sensX;

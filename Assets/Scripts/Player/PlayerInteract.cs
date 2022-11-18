@@ -9,7 +9,7 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         // Get ineteract input
-        if (Input.GetKeyDown("e") && status.interrupted == false)
+        if (Input.GetKeyDown("e") && StatusManager.instance.interrupted == false)
             Interact();
 
         // Get number input
@@ -27,7 +27,7 @@ public class PlayerInteract : MonoBehaviour
     {
         if (Physics.Raycast(cameraPosition.position, cameraPosition.transform.forward, out hit, 2f * reachMultiplier, LayerMask.GetMask("Placeable")))
         {
-            PlaceableInterface p = hit.collider.GetComponentInParent<PlaceableInterface>();
+            PlaceableInterface p = hit.collider.GetComponentInParent <PlaceableInterface> ();
             if (p != null)
                 p.Place(child, hit.collider.transform);
         }
@@ -37,7 +37,7 @@ public class PlayerInteract : MonoBehaviour
     {
         if (Physics.Raycast(cameraPosition.position, cameraPosition.transform.forward, out hit, 2f * reachMultiplier, LayerMask.GetMask("Interactable")))
         {
-            InteractableInterface i = hit.collider.GetComponentInParent<InteractableInterface>();
+            InteractableInterface i = hit.collider.GetComponentInParent <InteractableInterface> ();
             if (i != null)
                 i.Action(child);
         }
@@ -47,7 +47,7 @@ public class PlayerInteract : MonoBehaviour
         Debug.DrawLine(cameraPosition.position, cameraPosition.position + cameraPosition.forward * reachMultiplier);
         if (Physics.Raycast(cameraPosition.position, cameraPosition.forward, out hit, 2f * reachMultiplier, LayerMask.GetMask("Interactable")))
         {
-            InteractableInterface i = hit.collider.GetComponentInParent<InteractableInterface>();
+            InteractableInterface i = hit.collider.GetComponentInParent <InteractableInterface> ();
             if (i != null)
                 alert.text = i.prompt;
         }
@@ -59,17 +59,16 @@ public class PlayerInteract : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cameraPosition.position, cameraPosition.transform.forward, out hit, 2f * reachMultiplier, LayerMask.GetMask("Interactable")))
         {
-            InteractableInterface i = hit.collider.GetComponentInParent<InteractableInterface>();
+            InteractableInterface i = hit.collider.GetComponentInParent <InteractableInterface> ();
             if (i != null)
                 i.Action();
         }
     }
     void Start()
     {
-        status = FindObjectOfType<StatusManager>();
+        alert = GameObject.FindWithTag("Alert").GetComponent <TMP_Text> ();
     }
-    StatusManager status;
     public Transform cameraPosition;
-    public TMP_Text alert;
+    TMP_Text alert;
     RaycastHit hit;
 }

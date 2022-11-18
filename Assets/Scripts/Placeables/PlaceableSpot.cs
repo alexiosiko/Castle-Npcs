@@ -25,7 +25,7 @@ public class PlaceableSpot : PlaceableInterface
         item.transform.localPosition = Vector3.zero; // Zero out the position relative to parent
 
         // Play audio
-        soundManager.PlayAudio("itemplace", true);
+        SoundManager.instance.PlayAudio("itemplace", true);
 
         // Check conditions
         placeableCondition.Check();
@@ -33,10 +33,8 @@ public class PlaceableSpot : PlaceableInterface
     void Start()
     {
         slots = FindObjectOfType<Slots>();
-        soundManager = FindObjectOfType<SoundManager>();
         placeableCondition = GetComponentInParent<PlaceableCondition>();
     }
     Slots slots;
-    SoundManager soundManager;
     PlaceableCondition placeableCondition;
 }

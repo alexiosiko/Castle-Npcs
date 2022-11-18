@@ -11,29 +11,41 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed = 5f;
     float speedBoost = 1f;
     Vector3 velocity;
-    void Start()
-    {
-        status = FindObjectOfType<StatusManager>();
-        soundManager = FindObjectOfType<SoundManager>();
-        controller = GetComponent<CharacterController>();
-    }
+    Vector3 move = Vector3.zero;
     void Update()
     {
-        MovePlayer();
+        MovePlayer ();
+        AnimateHand ();
     }
+    void AnimateHand ()
+    {
+        // Animate hand walking
+        if (move != Vector3.zero)
+        {
+            print ("moving");
 
-    private void MovePlayer()
+            if (handAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") == false)
+                handAnimator.CrossFade ("Walk", 0.2f);
+        }
+        else
+        {
+            print ("idleing");
+            if (handAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false)
+                handAnimator.CrossFade ("Idle", 0.2f);
+        }
+    }
+    void MovePlayer()
     {
         // If interrupted
-        if (status.interrupted == true)
+        if (StatusManager.instance.interrupted == true)
             return;
             
         // Don't ask me i copied this from somewhere
         if (controller.isGrounded && velocity.y < 0)
             velocity.y = -2f;
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        float x = Input.GetAxisRaw ("Horizontal");
+        float z = Input.GetAxisRaw ("Vertical");
 
         if (Input.GetButton("Fire3"))
             speedBoost = sprintSpeed;
@@ -41,24 +53,30 @@ public class PlayerMovement : MonoBehaviour
             speedBoost = 1f;
 
 
-        Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * (baseSpeed + speedBoost) * Time.deltaTime);
+        move = transform.right * x + transform.forward * z;
+        controller.Move (move * (baseSpeed + speedBoost) * Time.deltaTime);
 
         // Audio -> play footsteps
         if (move != Vector3.zero)
-            soundManager.PlayAudio("footsteps");
+            SoundManager.instance.PlayAudio ("footsteps");
         else
-            soundManager.StopAudio("footsteps");
+            SoundManager.instance.StopAudio ("footsteps");
         
         if (Input.GetButtonDown("Jump") && controller.isGrounded)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move (velocity * Time.deltaTime);
+
+
+
 
     }
-    StatusManager status;
-    SoundManager soundManager;
     CharacterController controller;
+    void Start ()
+    {
+        controller = GetComponent <CharacterController> ();
+    }
+    [SerializeField] Animator handAnimator;
 
 }

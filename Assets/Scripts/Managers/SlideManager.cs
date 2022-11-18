@@ -7,19 +7,22 @@ using TMPro;
 
 public class SlideManager : MonoBehaviour
 {
-    StatusManager status;
+    public static SlideManager instance;
+    void Awake ()
+    {
+        instance = this;
+    }
     public Slide[] slides;
     public Image blackOut;
     public TMP_Text text;
     void Start()
     {
-        status = FindObjectOfType<StatusManager>();
         StartCoroutine(StartSlideShow());
     }
     IEnumerator StartSlideShow()
     {
         blackOut.enabled = true;
-        status.Interrupt();
+        StatusManager.instance.Interrupt();
 
         blackOut.DOFade(1, 1.5f);
         yield return new WaitForSeconds(1.5f);
@@ -34,6 +37,6 @@ public class SlideManager : MonoBehaviour
         blackOut.DOFade(0, 1.5f);
 
         // actions[0].DoAction();
-        status.UnInterrupt();
+        StatusManager.instance.UnInterrupt();
     }
 }

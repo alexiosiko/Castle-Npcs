@@ -6,7 +6,6 @@ using DG.Tweening;
 
 public class CanvasManager : MonoBehaviour
 {
-
     public void Chat(string text, float time)
     {
         StopCoroutine ("Begin"); // Stop if existing
@@ -32,14 +31,14 @@ public class CanvasManager : MonoBehaviour
         BookInterface bookInterface = bookTransform.GetComponentInChildren<BookInterface>();
         bookInterface.bookPages = pages;
         bookInterface.Start();
-        soundManager.PlayAudio("bookopen");
+        SoundManager.instance.PlayAudio("bookopen");
 
         MoveInventory(150);
     }
     
     public void CloseBook()
     {
-        soundManager.PlayAudio("bookclose");
+        SoundManager.instance.PlayAudio("bookclose");
         bookTransform.DOLocalMoveY(-500, 0.7f);
         status.UnInterrupt();
 
@@ -53,13 +52,16 @@ public class CanvasManager : MonoBehaviour
     StatusManager status;
     Transform bookTransform;
     public TMP_Text canvasChat;
-    SoundManager soundManager;
     Transform inventoryTransform;
+    public static CanvasManager instance;
+    void Awake ()
+    {
+        instance = this;
+    }
     void Start()
     {
         inventoryTransform = GameObject.FindWithTag("Inventory Transform").transform;
         status = FindObjectOfType<StatusManager>();
         bookTransform = GameObject.FindWithTag("Book Transform").transform;
-        soundManager = FindObjectOfType<SoundManager>();
     }
 }

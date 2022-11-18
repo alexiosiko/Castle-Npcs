@@ -6,14 +6,17 @@ public class StatusManager : MonoBehaviour
 {
     public GameObject crosshair;
     public bool interrupted = false;
-    SoundManager soundManager;
-    void Start()
+    public static StatusManager instance;
+    void Awake ()
     {
-        soundManager = FindObjectOfType<SoundManager>();
+        instance = this;
+    }
+    void Start ()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    public void Interrupt()
+    public void Interrupt ()
     {
         Debug.Log("Interrupting");
         interrupted = true;
@@ -29,6 +32,4 @@ public class StatusManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-
 }

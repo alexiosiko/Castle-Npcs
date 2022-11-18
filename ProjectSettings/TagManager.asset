@@ -14,11 +14,12 @@ TagManager:
   - Book Transform
   - Enviroment Parent
   - Inventory Transform
+  - Hand Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - PostProcessing
+  - 
   - Water
   - UI
   - Hands

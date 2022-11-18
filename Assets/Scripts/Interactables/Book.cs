@@ -10,23 +10,15 @@ public class Book : InteractableInterface
     public Sprite[] pages;
     public override void Action()
     {
-        canvasManager.OpenBook(pages);
+        CanvasManager.instance.OpenBook(pages);
     }
     protected override void Start()
     {
         base.Start();
-
-        soundManager = FindObjectOfType<SoundManager>();
-        status = FindObjectOfType<StatusManager>();
-        canvasManager = FindObjectOfType<CanvasManager>();
-
         prompt = "Press e to read book";
     }
     public override void Action(int child)
     {
         // An action that ALL entites reform
     }
-    SoundManager soundManager;
-    StatusManager status;
-    CanvasManager canvasManager;
 }

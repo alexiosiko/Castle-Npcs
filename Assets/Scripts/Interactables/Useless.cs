@@ -25,7 +25,6 @@ public class Useless : InteractableInterface
     protected override void Start()
     {
         base.Start();
-        
         defaultRotation = transform.localEulerAngles;
         animator = GetComponent<Animator>();
     }

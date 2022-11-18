@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager instance;
     // This sound manager will be for sounds that will not use 3D
     public Sound[] sounds;
     void Awake()
     {
+        // Set singleton
+        instance = this;
+
+        
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

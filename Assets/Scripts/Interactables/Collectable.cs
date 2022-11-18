@@ -8,7 +8,7 @@ public class Collectable : InteractableInterface
     public Sprite sprite; // This is the sprite shown in inventory
     public override void Action()
     {
-        soundManager.PlayAudio("itempickup", true); // Sound effect
+        SoundManager.instance.PlayAudio("itempickup", true); // Sound effect
 
         // Add the sprite
         slots.AddItem(gameObject, sprite);
@@ -19,9 +19,7 @@ public class Collectable : InteractableInterface
     }
     protected override void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
         slots = FindObjectOfType<Slots>();
     }
-    SoundManager soundManager;
     Slots slots;
 }
