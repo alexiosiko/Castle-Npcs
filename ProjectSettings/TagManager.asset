@@ -14,7 +14,7 @@ TagManager:
   - Book Transform
   - Enviroment Parent
   - Inventory Transform
-  - Hand Item
+  - Hand
   layers:
   - Default
   - TransparentFX

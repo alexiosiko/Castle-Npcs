@@ -11,27 +11,27 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed = 5f;
     float speedBoost = 1f;
     Vector3 velocity;
-    Vector3 move = Vector3.zero;
+    [SerializeField] Vector3 move = Vector3.zero;
     void Update()
     {
         MovePlayer ();
         AnimateHand ();
     }
+    bool walking = false;
     void AnimateHand ()
     {
         // Animate hand walking
         if (move != Vector3.zero)
         {
-            print ("moving");
-
-            if (handAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") == false)
-                handAnimator.CrossFade ("Walk", 0.2f);
+            if (walking == false)
+                handAnimator.CrossFadeInFixedTime ("Walk", 0.3f);
+            walking = true;
         }
         else
         {
-            print ("idleing");
-            if (handAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false)
-                handAnimator.CrossFade ("Idle", 0.2f);
+            if (walking == true)
+                handAnimator.CrossFadeInFixedTime ("Idle", 0.3f);
+            walking = false;
         }
     }
     void MovePlayer()
@@ -67,16 +67,12 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move (velocity * Time.deltaTime);
-
-
-
-
     }
-    CharacterController controller;
     void Start ()
     {
         controller = GetComponent <CharacterController> ();
+        handAnimator = GameObject.FindWithTag("Hand").GetComponentInChildren <Animator> ();
     }
+    CharacterController controller;
     [SerializeField] Animator handAnimator;
-
 }
