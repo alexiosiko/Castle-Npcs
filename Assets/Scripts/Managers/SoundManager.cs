@@ -61,12 +61,12 @@ public class SoundManager : MonoBehaviour
         if (s == null)
             return;
 
+        // If asked to interrupt INTERRUPT
         if (interrupt == true)
         {
             s.source.Play();
             return;
         }
-
 
         // Play audio
         if (s.source.isPlaying == false)

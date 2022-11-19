@@ -4,9 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class Book : InteractableInterface
+public class Book : Interactable
 {   
-    [Header("No sounds required")]
     public Sprite[] pages;
     public override void Action()
     {
@@ -16,9 +15,5 @@ public class Book : InteractableInterface
     {
         base.Start();
         prompt = "Press e to read book";
-    }
-    public override void Action(int child)
-    {
-        // An action that ALL entites reform
     }
 }

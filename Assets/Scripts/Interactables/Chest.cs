@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chest : InteractableInterface
+public class Chest : Interactable
 {
     public override void Action()
     {
@@ -14,12 +14,9 @@ public class Chest : InteractableInterface
         foreach (Transform t in transform) // Swap the layerMasks
             t.gameObject.layer = LayerMask.GetMask("Default");
     }
-    public override void Action(int child)
-    {
-        // An action that ALL entites reform
-    }
     protected override void Start()
     {
+        base.Start ();
         prompt = "Press e to open chest";
     }
 }

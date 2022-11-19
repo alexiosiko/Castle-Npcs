@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractableInterface
+public class Door : Interactable
 {
     public string keyName;
     public bool locked = false;
@@ -12,43 +12,21 @@ public class Door : InteractableInterface
             Open();
         else // Door is locked
         {
-            CanvasManager.instance.Chat("Door is locked ... ", 1);
-            WiggleDoor();
+            if (inventory.RemoveItem (keyName) == true)
+                Unlock ();
+            else
+                WiggleDoor();
         }
     }
-    public override void Action(int child)
+    void Unlock()
     {
-        Unlock(child);
-    }
-    void Unlock(int child)
-    {
-        if (locked == false) // Is unlocked
-            return;
-        
-
-        GameObject item = slots.GetItem(child);
-        if (item == null) // If NO item
-        {
-            CanvasManager.instance.Chat("You don't have an item in this slot ...");
-            WiggleDoor();
-            return;
-        }
-
-        // If item is NOT the key STOP
-        if (item.GetComponent<Collectable>().itemName != keyName)
-        {
-            CanvasManager.instance.Chat("This key does not fit ...");
-            WiggleDoor();
-            return;
-        }
-
-        // UNLOCK
-        slots.RemoveItem(child); // Delete key
-        locked = false;
-        PlayAudio(sounds[2]); // Unlock sound effect
+        CanvasManager.instance.Chat ("You unlock the door ...", 1);
+        locked = false; // UNLOCK
+        PlayAudio (sounds[2]); // Unlock sound effect
     }
     void WiggleDoor()
     {
+        CanvasManager.instance.Chat("You don't have a key for this ... ", 1);
         animator.Play("Wiggle");
         PlayAudio(sounds[1]);
     }
@@ -56,18 +34,16 @@ public class Door : InteractableInterface
     {
         PlayAudio(sounds[0]); // 0 is door open audio
         animator.Play("Action"); // Animate
-        foreach (Transform t in transform) // Swap the layerMasks
+        foreach (Transform t in transform) // Swap the layerMasks so we don't interact with this door again DUH
             t.gameObject.layer = LayerMask.GetMask("Default");
     }
     protected override void Start()
     {
         base.Start();
-        slots = FindObjectOfType<Slots>();
         animator = GetComponent<Animator>();
-
+        inventory = FindObjectOfType <Inventory> ();
         prompt = "Press e to open door";
     }
-
+    Inventory inventory;
     Animator animator;
-    Slots slots;
 }

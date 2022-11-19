@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class Collectable : InteractableInterface
+public class Collectable : Interactable
 {
     public string itemName;
-    public Sprite sprite; // This is the sprite shown in inventory
     public override void Action()
     {
-        SoundManager.instance.PlayAudio("itempickup", true); // Sound effect
-
-        // Add the sprite
-        slots.AddItem(gameObject, sprite);
+        SoundManager.instance.PlayAudio ("itempickup", true); // Sound effect
+        CanvasManager.instance.Chat ($"You've picked up the {itemName} key");
+        transform.DOMoveY (transform.position.y + 0.5f, 0.5f);
+        transform.DOScale (transform.lossyScale * 1.75f, 0.5f);
+        Invoke ("DestroyItem", 0.7f);
     }
-    public override void Action(int child)
+    void DestroyItem ()
     {
-        // An action that ALL entites reform
+        inventory.AddItem (itemName);
+        Destroy (gameObject);
     }
-    protected override void Start()
+    protected override void Start ()
     {
-        slots = FindObjectOfType<Slots>();
+        inventory = FindObjectOfType <Inventory> ();
     }
-    Slots slots;
+    Inventory inventory;
 }

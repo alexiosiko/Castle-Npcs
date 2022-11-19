@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Useless : InteractableInterface
+public class Useless : Interactable
 {
     Animator animator;
     Vector3 defaultRotation;
-    public override void Action(int child) {}
     public override void Action()
     {
         if (sounds.Length != 0)

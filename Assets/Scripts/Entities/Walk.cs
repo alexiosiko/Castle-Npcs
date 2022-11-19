@@ -26,6 +26,12 @@ public class Walk : MonoBehaviour
         direction = nodes[i] - transform.position;
         direction.y = 0; // Don't care about height
         controller.Move(direction.normalized * speed * Time.deltaTime);
+
+        // Audio -> play footsteps
+        if (direction != Vector3.zero)
+            SoundManager.instance.PlayAudio ("footsteps");
+        else
+            SoundManager.instance.StopAudio ("footsteps");
         
 
         // Get distance
@@ -43,6 +49,9 @@ public class Walk : MonoBehaviour
     }
     public void LookTowardsNode()
     {
+        // Keep the same level of Y axis so he doesn't tilt
+        // his head up or down when walking 
+        nodes[i].y = transform.position.y;
         transform.DOLookAt( nodes[i], 0.5f );
     }
     void Update()

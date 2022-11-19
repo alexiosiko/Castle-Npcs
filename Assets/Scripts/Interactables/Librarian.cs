@@ -8,17 +8,15 @@ public class Librarian : Entity
     protected override void Start()
     {
         base.Start();
+        PlayAudio (sounds[1]);
         wander = GetComponent<Walk>();
     }
     public override void Action()
     {
         base.Action();
         PlayAudio(sounds[0], false);
-
         PlayText();
-
         LookTowards(player);
-        
         StopAllCoroutines();
         StartCoroutine(Freeze());
     }
@@ -28,12 +26,19 @@ public class Librarian : Entity
     }
     IEnumerator Freeze()
     {
-        // PlayAudio(sounds[0], true);
+        // Stop walking
         wander.enabled = false;
+        StopAudio (sounds[1]);
         animator.Play("idle");
+
+        // Wait
         yield return new WaitForSeconds(2);
+        
+        // Start walking
         animator.Play("walk");
         wander.enabled = true;
+        PlayAudio (sounds[1]);
+        
         wander.LookTowardsNode(); // Change his look direction
     }
 }

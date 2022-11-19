@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Entity : InteractableInterface
+public class Entity : Interactable
 {
     public string text;
     protected Animator animator;
     protected Transform player;
     
     public override void Action()
-    {
-        // An action that ALL entites reform
-    }
-    public override void Action(int child)
     {
         // An action that ALL entites reform
     }
@@ -31,7 +27,6 @@ public class Entity : InteractableInterface
 
     protected override void Start()
     {
-        
         base.Start();
         player = GameObject.FindWithTag("Player").transform;
         animator = GetComponent<Animator>();
