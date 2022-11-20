@@ -14,7 +14,7 @@ public class Librarian : Entity
         if (textIndex == 1)
         {
             animator.CrossFade ("frustrated", 0.2f);
-            if (Inventory.instance.ContainsItem ("bluebook") == true)
+            if (Inventory.instance.RemoveItem ("bluebook") == true)
             {
                 textIndex++;
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerCamera : MonoBehaviour
         if (StatusManager.instance.interrupted == true)
             return;
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+            OpenInventory ();
+
         float mouseX = Input.GetAxis("Mouse X") * sensX;
         float mouseY = Input.GetAxis("Mouse Y") * sensY;
 
@@ -23,6 +27,28 @@ public class PlayerCamera : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         orientation.Rotate(Vector3.up * mouseX);
+    }
+    bool inventoryOpened = false;
+    void OpenInventory ()
+    {
+        if (inventoryOpened == false)
+        {
+            inventoryOpened = true;
+            Open();
+        }
+        else
+        {
+            inventoryOpened = false;
+            Close();
+        }
+    }
+    void Open ()
+    {
+  
+    }
+    void Close ()
+    {
+
     }
     
 }

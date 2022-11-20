@@ -9,7 +9,8 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         // Get ineteract input
-        if (Input.GetKeyDown("e") && StatusManager.instance.interrupted == false)
+        if (Input.GetKeyDown("e") && StatusManager.instance.interrupted == false
+            || Input.GetMouseButtonDown(0) && StatusManager.instance.interrupted == false)
             Interact();
 
         // Highlight object

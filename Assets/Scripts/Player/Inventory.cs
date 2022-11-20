@@ -1,34 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] List<string> items;
-    public void AddItem (string name)
+    public void AddItem (Transform item)
     {
-        items.Add (name);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform t = transform.GetChild(i);
+            if (t.childCount == 0)
+            {
+                item.parent = t;
+                return;
+            }
+        }
     }
     public bool RemoveItem (string name)
     {
-        for (int i = 0; i < items.Count; i++)
-            if (items[i] == name)
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform t = transform.GetChild(i);
+            if (t.childCount != 0)
             {
-                items.Remove (name);
-                return true;
+                Transform item = t.GetChild(0);
+                if (item.name == name)
+                {
+                    item.parent = null; // Removed from inventory
+                    StartCoroutine (AnimateRemoval (item));
+                    return true;  
+                }
             }
+        }
         return false;
     }
-    public bool ContainsItem (string name)
+    IEnumerator AnimateRemoval (Transform item)
     {
-        for (int i = 0; i < items.Count; i++)
-            if (items[i] == name)
-                return true;
-        return false;
+        // Change parent
+        item.parent = infront;
+
+        // Just incase
+        item.transform.DOKill ();
+
+        // Move
+        item.transform.DOLocalMove(Vector3.zero, 0.5f);
+
+        // Rotate
+        transform.DORotate (new Vector3(259, 259, 259), 3);
+
+        // Wait
+        yield return new WaitForSeconds (1);
+
+        // Move above
+        transform.DOLocalMove (item.position + new Vector3 (0, 3, 1), 0.5f);
+        
+        // Wait to tween before destroying
+        yield return new WaitForSeconds (1f);
+        Destroy (item.gameObject);
     }
-    public static Inventory instance;
+    
+    [HideInInspector] public static Inventory instance;
     void Awake ()
     {
         instance = this;
+        infront = GameObject.FindWithTag("Infront").transform;
     }
+    Transform infront;
 }

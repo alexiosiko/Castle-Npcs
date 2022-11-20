@@ -13,8 +13,9 @@ TagManager:
   - Book Text
   - Book Transform
   - Enviroment Parent
-  - Inventory Transform
   - Hand
+  - Infront
+  - Inventory
   layers:
   - Default
   - TransparentFX
