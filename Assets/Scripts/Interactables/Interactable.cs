@@ -19,7 +19,12 @@ public abstract class Interactable : MonoBehaviour
         s.source.volume = s.volume;
         s.source.pitch = s.pitch;
         s.source.loop = s.loop;
+        
+        // For distance
+        s.source.maxDistance = 10;
+        s.source.rolloffMode = AudioRolloffMode.Linear;
         s.source.spatialBlend = s.spacialBlend;
+
     }
     public void StopAudio(Sound sound)
     {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 273571542236629669}
   - component: {fileID: 4147318504659601833}
   - component: {fileID: 4353392563505008882}
+  - component: {fileID: 1852939115}
   m_Layer: 0
   m_Name: Fountain_01
   m_TagString: Untagged
@@ -98,3 +99,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 82ede2512725ad04086b5165a92f98e9, type: 3}
+--- !u!114 &1852939115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9220546159144753475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1286bd84c8819448723eb749302878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    name: '*Only Required if SoundManager*'
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 763247cfbe7ef6045953a65d5ff27339, type: 3}
+    loop: 1
+    pitch: 1
+    volume: 0.05
+    spacialBlend: 1

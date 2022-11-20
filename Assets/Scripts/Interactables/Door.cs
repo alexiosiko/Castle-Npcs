@@ -12,7 +12,7 @@ public class Door : Interactable
             Open();
         else // Door is locked
         {
-            if (inventory.RemoveItem (keyName) == true)
+            if (Inventory.instance.RemoveItem (keyName) == true)
                 Unlock ();
             else
                 WiggleDoor();
@@ -41,9 +41,7 @@ public class Door : Interactable
     {
         base.Start();
         animator = GetComponent<Animator>();
-        inventory = FindObjectOfType <Inventory> ();
         prompt = "Press e to open door";
     }
-    Inventory inventory;
     Animator animator;
 }

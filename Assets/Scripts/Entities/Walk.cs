@@ -5,46 +5,31 @@ using DG.Tweening;
 
 public class Walk : MonoBehaviour
 {
-    public float speed = 1f;
     public Vector3[] nodes;
-    private float distance;
-    CharacterController controller;
-    private Vector3 direction;
     private int i = 0;
-    private Vector3 velocity = Vector3.zero;
-
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        LookTowardsNode();
+        GetComponent <Animator> ().Play ("walk");
     }
     void Wander()
     {
         // We omit the Y vector
         Vector2 startXZ = new Vector2(transform.position.x, transform.position.z);
         Vector2 endXZ = new Vector2(nodes[i].x, nodes[i].z);
-        
-        direction = nodes[i] - transform.position;
-        direction.y = 0; // Don't care about height
-        controller.Move(direction.normalized * speed * Time.deltaTime);
 
-        // Audio -> play footsteps
-        if (direction != Vector3.zero)
-            SoundManager.instance.PlayAudio ("footsteps");
-        else
-            SoundManager.instance.StopAudio ("footsteps");
+        // Look towards
+        LookTowardsNode();
         
-
         // Get distance
-        distance = Vector2.Distance(startXZ, endXZ);
+        float distance = Vector2.Distance(startXZ, endXZ);
+
+        // When close, go to next node
         if ( distance < 0.2f )
         {
             i++;
             if (i == nodes.Length)
-            i = 0;
-            // Look towards new direction
-            // I made this a function so i can call it from another script
-            // rather than just calling this function every frame :D
-            LookTowardsNode(); 
+                i = 0;
         }
     }
     public void LookTowardsNode()
@@ -57,14 +42,13 @@ public class Walk : MonoBehaviour
     void Update()
     {
         Wander();
-
-        // Gravity
-        if (controller.isGrounded == false)
-        {
-            velocity += Physics.gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
-        }        
-        else
-            velocity = Vector3.zero;
+        // // Gravity
+        // if (controller.isGrounded == false)
+        // {
+        //     velocity += Physics.gravity * Time.deltaTime;
+        //     controller.Move(velocity * Time.deltaTime);
+        // }        
+        // else
+        //     velocity = Vector3.zero;
     }
 }

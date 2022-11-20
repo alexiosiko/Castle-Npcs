@@ -18,7 +18,6 @@ public class StatusManager : MonoBehaviour
     }
     public void Interrupt ()
     {
-        Debug.Log("Interrupting");
         interrupted = true;
         crosshair.SetActive(false); // Disable crosshair
         Cursor.lockState = CursorLockMode.None;
@@ -26,7 +25,6 @@ public class StatusManager : MonoBehaviour
     }
     public void UnInterrupt()
     {
-        Debug.Log("not Interrupting");
         crosshair.SetActive(true); // Enable crosshair
         interrupted = false;
         Cursor.lockState = CursorLockMode.Locked;

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+
 public class Entity : Interactable
 {
-    public string text;
     protected Animator animator;
     protected Transform player;
-    
     public override void Action()
     {
-        // An action that ALL entites reform
+        // An action that ALL entites preform
     }
     protected void LookTowards(Transform target)
     {
@@ -29,7 +28,7 @@ public class Entity : Interactable
     {
         base.Start();
         player = GameObject.FindWithTag("Player").transform;
-        animator = GetComponent<Animator>();
+        animator = GetComponent <Animator> ();
         prompt = "Press e to talk to";
     }
 }
