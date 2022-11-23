@@ -12,38 +12,10 @@ public class FemalePeasant : Entity
     {
         base.Action ();
         CanvasManager.instance.Chat (texts[0]);
-        ikActive = true;
-
-        CancelInvoke ("DisableIK");
-        Invoke ("DisableIK", 3);
-    }
-    void OnAnimatorIK ()
-    {
-        animator.SetLookAtWeight (weight);
-        
-        if (ikActive)
-        {
-            if (player != null)
-            {
-                animator.SetLookAtPosition (player.position);
-                weight = Mathf.Lerp (weight, 1, Time.deltaTime * 2.5f);
-            }
-        }
-        else
-        {
-            weight = Mathf.Lerp (weight, 0, Time.deltaTime * 2.5f);
-        }
-        
-    }
-    void DisableIK () 
-    {
-        ikActive = false;
     }
     protected override void Start()
     {
         base.Start ();
         animator.Play ("sitting");
     }
-    [HideInInspector] public bool ikActive;
-    float weight = 0;
 }

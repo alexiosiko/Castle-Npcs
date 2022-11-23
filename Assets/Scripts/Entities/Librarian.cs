@@ -11,19 +11,16 @@ public class Librarian : Entity
     };
     public override void Action()
     {
+        base.Action ();
         if (textIndex == 1)
         {
             animator.CrossFade ("frustrated", 0.2f);
             if (Inventory.instance.RemoveItem ("bluebook") == true)
-            {
                 textIndex++;
-            }
         }
-
-
         PlayAudio(sounds[0], false);
         PlayText();
-        LookTowards(player);
+        // LookTowards(player);
 
         StopAllCoroutines();
         StartCoroutine(Freeze());
@@ -50,17 +47,17 @@ public class Librarian : Entity
         yield return new WaitForSeconds (time);
         
         // Start walking
-        animator.Play("walk");
+        animator.CrossFade ("walk", 0.2f);
         wander.enabled = true;
         PlayAudio (sounds[1]);
         
-        wander.LookTowardsNode(); // Change his look direction
+        // wander.LookTowardsNode(); // Change his look direction
     }
-    Walk wander;
+    Wander wander;
     protected override void Start()
     {
         base.Start();
         PlayAudio (sounds[1]);
-        wander = GetComponent <Walk> ();
+        wander = GetComponent <Wander> ();
     }
 }
