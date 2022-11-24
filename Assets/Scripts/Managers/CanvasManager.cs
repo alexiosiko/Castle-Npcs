@@ -8,10 +8,10 @@ public class CanvasManager : MonoBehaviour
 {
     public void Chat(string text, float time = 4)
     {
-        StopCoroutine ("Begin"); // Stop if existing
-        StartCoroutine(Begin(text, time));
+        StopCoroutine ("BeginChat"); // Stop if existing
+        StartCoroutine(BeginChat(text, time));
     }
-    IEnumerator Begin(string text, float time)
+    IEnumerator BeginChat(string text, float time)
     {
         canvasChat.DOFade(0, 0); // Make alpha 0
         canvasChat.text = text;
@@ -19,32 +19,26 @@ public class CanvasManager : MonoBehaviour
         yield return new WaitForSeconds(time + 1); // The one is time for fade
         canvasChat.DOFade(0, 1);
     }
-    public void OpenBook (Sprite [] pages)
+    public void OpenInterface (Transform t)
     {
-        bookTransform.DOLocalMoveY (20, 0.7f); // 20 is the height
+        // Store interface
+        currentInterface = t;
 
-        StatusManager.instance.Interrupt();
+        t.DOLocalMoveY (20, 0.7f); // 20 is the height
 
-        bookInterface.bookPages = pages;
-        bookInterface.Start ();
-
-        SoundManager.instance.PlayAudio ("bookopen");
+        StatusManager.instance.Interrupt ();
     }
-    
-    public void CloseBook()
+    Transform currentInterface;
+    public void CloseInterface ()
     {
-        bookTransform.DOMoveY( -500f, 0.7f);
-        SoundManager.instance.PlayAudio("bookclose");
-        StatusManager.instance.UnInterrupt();
+        currentInterface.DOMoveY (-500, 1);
+
+        StatusManager.instance.UnInterrupt ();
     }
-    public Transform bookTransform;
     [SerializeField] TMP_Text canvasChat;
     public static CanvasManager instance;
-    BookInterface bookInterface;
     void Awake ()
     {
-        bookTransform = GameObject.FindWithTag ("Book Transform").transform;
-        bookInterface = bookTransform.GetComponentInChildren <BookInterface> ();
         instance = this;
     }
 }

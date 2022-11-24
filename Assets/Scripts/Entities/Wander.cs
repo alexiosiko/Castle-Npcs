@@ -5,17 +5,19 @@ using DG.Tweening;
 
 public class Wander : MonoBehaviour
 {
-	public Transform[] nodesTranforms;
-    public float speed = 5;
-	public Vector3[] nodePositions = null;
-	public int currentNodeIndex = 0;
+	[SerializeField] Transform[] nodesTranforms;
+    [Range(0.7f, 1.3f)] [SerializeField] float speed = 1;
+	Vector3[] nodePositions = null;
+	int currentNodeIndex = 0;
 	void Start ()
 	{
 		StoreNodePositions ();
 		animator = GetComponent <Animator> ();
 	
 		animator.Play ("walk");
+		animator.speed = speed;
 		InvokeRepeating ("CheckInFront", 1, 1);
+		InvokeRepeating ("LookTowardsNode", 1, 1);
 	}
 	void Update ()
 	{
@@ -79,7 +81,6 @@ public class Wander : MonoBehaviour
 	{
 		Gizmos.DrawWireSphere (transform.position + Vector3.up / 3 + transform.forward * 0.5f, 0.2f);
 	}
-	bool imRotating = false;
 	void StoreNodePositions ()
 	{
 		// Doing this because im keeping the nodeTransforms as a CHILD of this entity

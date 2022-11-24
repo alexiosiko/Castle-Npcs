@@ -142,7 +142,7 @@ MonoBehaviour:
     pitch: 1
     volume: 0.4
     spacialBlend: 1
-  - name: locked
+  - name: wiggle
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 789f6abbd102dba42930b95543cc0cde, type: 3}
     loop: 0
@@ -156,7 +156,8 @@ MonoBehaviour:
     pitch: 1
     volume: 0.7
     spacialBlend: 1
-  idRequired: goldkey
+  prompt: 
+  keyName: yellowkey
   locked: 0
 --- !u!1001 &1074073212787664088
 PrefabInstance:
@@ -384,7 +385,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: f5e95185ae4e28b4cb87147df0dc5b0e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d08a0d1aba6bbce4b815d4bd76548e32, type: 2}
+      objectReference: {fileID: 2100000, guid: b2bd60656a2c29e48ac6ca4651f7e4b7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e95185ae4e28b4cb87147df0dc5b0e, type: 3}
 --- !u!1 &6778079739669357198 stripped

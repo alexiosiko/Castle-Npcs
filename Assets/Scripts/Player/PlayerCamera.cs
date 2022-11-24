@@ -15,9 +15,6 @@ public class PlayerCamera : MonoBehaviour
         if (StatusManager.instance.interrupted == true)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-            OpenInventory ();
-
         float mouseX = Input.GetAxis("Mouse X") * sensX;
         float mouseY = Input.GetAxis("Mouse Y") * sensY;
 
@@ -28,27 +25,27 @@ public class PlayerCamera : MonoBehaviour
 
         orientation.Rotate(Vector3.up * mouseX);
     }
-    bool inventoryOpened = false;
-    void OpenInventory ()
-    {
-        if (inventoryOpened == false)
-        {
-            inventoryOpened = true;
-            Open();
-        }
-        else
-        {
-            inventoryOpened = false;
-            Close();
-        }
-    }
-    void Open ()
-    {
+    // bool inventoryOpened = false;
+    // void OpenInventory ()
+    // {
+    //     if (inventoryOpened == false)
+    //     {
+    //         inventoryOpened = true;
+    //         Open();
+    //     }
+    //     else
+    //     {
+    //         inventoryOpened = false;
+    //         Close();
+    //     }
+    // }
+    // void Open ()
+    // {
   
-    }
-    void Close ()
-    {
+    // }
+    // void Close ()
+    // {
 
-    }
+    // }
     
 }

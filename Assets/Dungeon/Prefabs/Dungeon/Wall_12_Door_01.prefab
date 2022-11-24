@@ -136,6 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bb2b962dae0624c9e34f75d7998c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds: []
+  prompt: 
+  keyName: 
+  locked: 0
 --- !u!1001 &147566217985611025
 PrefabInstance:
   m_ObjectHideFlags: 0

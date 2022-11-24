@@ -16,6 +16,7 @@ TagManager:
   - Hand
   - Infront
   - Inventory
+  - KeyCode
   layers:
   - Default
   - TransparentFX

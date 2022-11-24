@@ -22,17 +22,18 @@ public class Door : Interactable
     {
         CanvasManager.instance.Chat ("You unlock the door ...", 1);
         locked = false; // UNLOCK
-        PlayAudio (sounds[2]); // Unlock sound effect
+        PlayAudio ("unlock"); // Unlock sound effect
     }
     void WiggleDoor()
     {
-        CanvasManager.instance.Chat("You don't have a key for this ... ", 1);
+        CanvasManager.instance.Chat ("You'll need a " + keyName + " for this door ...", 1);
         animator.Play("Wiggle");
-        PlayAudio(sounds[1]);
+        PlayAudio("wiggle");
     }
     void Open()
     {
-        PlayAudio(sounds[0]); // 0 is door open audio
+        PlayAudio ("open");
+        
         animator.Play("Action"); // Animate
         foreach (Transform t in transform) // Swap the layerMasks so we don't interact with this door again DUH
             t.gameObject.layer = LayerMask.GetMask("Default");

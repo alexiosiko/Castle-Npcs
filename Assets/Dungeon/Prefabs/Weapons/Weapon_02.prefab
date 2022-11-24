@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2496351303182310821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7659003, y: 0.76590085, z: 0.76590085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,3 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27bc5458e0b231f40b82614c12033c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: 
+  sounds:
+  - name: 
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f14035ea6af26ce4c83d492d2ad0cb0f, type: 3}
+    loop: 0
+    pitch: 1.24
+    volume: 0.425
+    spacialBlend: 1
