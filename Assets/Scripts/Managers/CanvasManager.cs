@@ -31,7 +31,7 @@ public class CanvasManager : MonoBehaviour
     Transform currentInterface;
     public void CloseInterface ()
     {
-        currentInterface.DOMoveY (-500, 1);
+        currentInterface.DOMoveY (-750, 1);
 
         StatusManager.instance.UnInterrupt ();
     }
